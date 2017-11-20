@@ -17,7 +17,7 @@ public interface MochilaDao {
 
     public List<Mochila> initialize(List<Item> itens);
 
-    public int evaluate(Mochila mochila);
+    public int evaluate(Mochila mochila, int pontuacaoMaxima);
 
     public Mochila[] selection(List<Mochila> mochilas);
 

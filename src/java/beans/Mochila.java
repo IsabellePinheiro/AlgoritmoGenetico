@@ -14,15 +14,8 @@ public class Mochila {
     private Integer volume;
     private int[] itens;
     private int fitness;
-    /**
-     * Pontuação é calculada através
-     */
-    private int pontuacaoMaxima;
 
-    public Mochila(Integer volume, int[] itens) {
-        this.volume = volume;
-        this.itens = itens;
-        this.CalcularPontuacaoMaxima();
+    public Mochila() {
     }
 
     public Integer getVolume() {
@@ -45,15 +38,4 @@ public class Mochila {
         return fitness;
     }
 
-    public int getPontuacaoMaxima() {
-        return pontuacaoMaxima;
-    }
-
-    public void setPontuacaoMaxima(int pontuacaoMaxima) {
-        this.pontuacaoMaxima = pontuacaoMaxima;
-    }
-
-    private void CalcularPontuacaoMaxima(){
-        //TODO:
-    }
 }

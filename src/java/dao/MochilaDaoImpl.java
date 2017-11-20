@@ -31,7 +31,7 @@ public class MochilaDaoImpl implements MochilaDao {
     }
 
     @Override
-    public int evaluate(Mochila mochila) {
+    public int evaluate(Mochila mochila, int pontuacaoMaxima) {
         /*
         TODO:
         
