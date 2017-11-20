@@ -37,9 +37,6 @@ public class ItensController {
     }
 
     public Mochila getMochila() {
-        if (mochila == null) {
-            mochila = new Mochila();
-        }
         return mochila;
     }
 
@@ -113,11 +110,9 @@ public class ItensController {
         itensString.add(countCaneta + " Caneta(s) -     Preço individual: " + Caneta.preco + "     Volume individual: " + Caneta.volume);
         itensString.add(countLivro + " Livro(s) -     Preço individual: " + Livro.preco + "     Volume individual: " + Livro.volume);
         itensString.add(countPenal + " Penal(s) -     Preço individual: " + Penal.preco + "     Volume individual: " + Penal.volume);
-        itensString.add("Volume da Mochila: " + mochila.getVolume());
+//        itensString.add("Volume da Mochila: " + mochila.getVolume());
     }
 
     private void gerarMochila() {
-        mochila = new Mochila();
-        mochila.setVolume(50 + (int) (Math.random() * 50));
     }
 }
