@@ -49,7 +49,21 @@ public class MochilaDaoImpl implements MochilaDao {
 
     @Override
     public Mochila[] selection(List<Mochila> mochilas) {
-        
+        /**
+         * criar array x = mochila[2];
+         * Somar fitness de todas as mochilas
+         * Criar array de mochilas do tamando da soma dos fitness
+         * cada mochila vai ocupar y espaços do array onde y é o seu fitness
+         * gerar numero aleatorio z sendo que z está entre 0 e soma dos fitness
+         * 
+         * z[0] = array de mochilas[z]
+         * 
+         * gerar numero aleatorio w sendo que w está entre 0 e soma dos fitness
+         * se w = z gerar outro numero
+         * x[1] = array de mochilas[w]
+         * 
+         * retornar x
+         */
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
