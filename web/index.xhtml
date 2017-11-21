@@ -21,6 +21,10 @@
         <c:forEach items="#{itensController.itensString}" var="item">
             <p:outputLabel value="#{item}" /> <br/>
         </c:forEach>
+        <br/><br/><br/><br/>
+        <h:form rendered="#{itensController.mostraSolucionar}">
+            <p:commandButton actionListener="#{itensController.solucionar()}" value="Gerar itens" ajax="false" /> <br/><br/><br/>
+        </h:form>
     </h:body>
 </html>
 

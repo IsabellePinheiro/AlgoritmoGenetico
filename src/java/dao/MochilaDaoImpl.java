@@ -31,7 +31,7 @@ public class MochilaDaoImpl implements MochilaDao {
     }
 
     @Override
-    public int evaluate(Mochila mochila, int pontuacaoMaxima) {
+    public int evaluate(Mochila mochila, int pontuacaoMaxima, int volumeMaximo) {
         /*
         TODO:
         
@@ -84,7 +84,7 @@ public class MochilaDaoImpl implements MochilaDao {
     }
 
     @Override
-    public Mochila mutation(Mochila mochila) {
+    public List<Mochila> mutation(List<Mochila> mochila) {
         /*
         TODO:
         
@@ -98,7 +98,7 @@ public class MochilaDaoImpl implements MochilaDao {
     }
 
     @Override
-    public boolean stop(List<Mochila> mochilas, int nroGeracao) {
+    public boolean stop(List<Mochila> mochilas, int nroGeracao, int pontuacaoMaxima) {
         /*
         TODO:
         

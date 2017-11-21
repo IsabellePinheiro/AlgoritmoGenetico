@@ -11,6 +11,8 @@ import beans.Item;
 import beans.Livro;
 import beans.Mochila;
 import beans.Penal;
+import dao.MochilaDao;
+import dao.MochilaDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -21,9 +23,12 @@ import javax.faces.bean.SessionScoped;
 public class ItensController {
 
     private List<Item> itens;
-    private Mochila mochila;
     private int qtdItens;
     private List<String> itensString;
+    private final MochilaDao mochilaDao = new MochilaDaoImpl();
+    private List<Mochila> populacao;
+    private int volumeMaximo;
+    private boolean mostraSolucionar;
 
     public List<Item> getItens() {
         if (itens == null) {
@@ -34,14 +39,6 @@ public class ItensController {
 
     public void setItens(List<Item> itens) {
         this.itens = itens;
-    }
-
-    public Mochila getMochila() {
-        return mochila;
-    }
-
-    public void setMochila(Mochila mochila) {
-        this.mochila = mochila;
     }
 
     public Integer getQtdItens() {
@@ -61,6 +58,22 @@ public class ItensController {
 
     public void setItensString(List<String> itensString) {
         this.itensString = itensString;
+    }
+
+    public int getVolumeMaximo() {
+        return volumeMaximo;
+    }
+
+    public void setVolumeMaximo(int volumeMaximo) {
+        this.volumeMaximo = volumeMaximo;
+    }
+
+    public boolean isMostraSolucionar() {
+        return mostraSolucionar;
+    }
+
+    public void setMostraSolucionar(boolean mostraSolucionar) {
+        this.mostraSolucionar = mostraSolucionar;
     }
 
     public void gerarItens() {
@@ -83,8 +96,10 @@ public class ItensController {
                     break;
             }
         }
-        gerarMochila();
         gerarItensString();
+        mostraSolucionar = true;
+        
+        volumeMaximo = (int) (Math.random() * 50) + 50;
     }
 
     private void gerarItensString() {
@@ -110,9 +125,35 @@ public class ItensController {
         itensString.add(countCaneta + " Caneta(s) -     Preço individual: " + Caneta.preco + "     Volume individual: " + Caneta.volume);
         itensString.add(countLivro + " Livro(s) -     Preço individual: " + Livro.preco + "     Volume individual: " + Livro.volume);
         itensString.add(countPenal + " Penal(s) -     Preço individual: " + Penal.preco + "     Volume individual: " + Penal.volume);
-//        itensString.add("Volume da Mochila: " + mochila.getVolume());
+        itensString.add("Volume da Mochila: " + volumeMaximo);
     }
 
-    private void gerarMochila() {
+    public void solucionar() {
+        int nroGeracao = 1;
+        int pontuacaoMaxima = calculaPontuacaoMaxima();
+        Mochila[] melhores;
+        populacao = mochilaDao.initialize(itens);
+        populacao.forEach((mochila) -> {
+            mochila.setFitness(mochilaDao.evaluate(mochila, pontuacaoMaxima, volumeMaximo));
+        });
+
+        while (!mochilaDao.stop(populacao, nroGeracao, pontuacaoMaxima)) {
+            nroGeracao++;
+            melhores = mochilaDao.selection(populacao);
+            populacao = mochilaDao.crossover(melhores[0], melhores[1]);
+            populacao = mochilaDao.mutation(populacao);
+            populacao.forEach((mochila) -> {
+                mochila.setFitness(mochilaDao.evaluate(mochila, pontuacaoMaxima, volumeMaximo));
+            });
+        }
     }
+
+    private int calculaPontuacaoMaxima() {
+        int preco = 0;
+        for (Item item : itens) {
+            preco += item.getPreco();
+        }
+        return preco + volumeMaximo;
+    }
+
 }

@@ -34,6 +34,10 @@ public class Mochila {
         this.itens = itens;
     }
 
+    public void setFitness(int fitness) {
+        this.fitness = fitness;
+    }
+
     public int getFitness() {
         return fitness;
     }
